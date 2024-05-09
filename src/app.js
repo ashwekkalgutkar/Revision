@@ -11,11 +11,12 @@ app.use(express.json());
 app.use('/api', routes);
 
 const PORT = process.env.PORT || 3000;
+const MONGODB_URI = 'mongodb+srv://Ashwek:test@mongodb.3krsdlp.mongodb.net/Food_app';
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true
+mongoose.connect(MONGODB_URI, {
+  // useNewUrlParser: true,
+  // useUnifiedTopology: true,
+  // useCreateIndex: true
 }).then(() => {
   console.log('Connected to MongoDB');
   app.listen(PORT, () => {
