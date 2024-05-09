@@ -1,6 +1,8 @@
 const express=require('express');
 const app=express();
+
 app.use(express.json());
+
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 const bodyParser=require('body-parser');
@@ -9,12 +11,15 @@ const cors=require('cors');
 app.use(cors());
 
 
-const{connection, User, Restaurant, Order}=require('./db');
+const{Con_string, User, Restaurant, Order}=require('./db');
+
+
+
 app.post("/api/register", async(req,res)=>{
     try {
         const user=req.body;
-        const hashed=user.password;
-        bcrypt.hash(hashed, 6,async function(err,hash){
+        const hashedpassword=user.password;
+        bcrypt.hash(hashedpassword, 6,async function(err,hash){
             if(err){
                 res.send('error hashing',err);
             }else{
@@ -40,8 +45,8 @@ app.post("/api/login", async(req ,res)=>{
         const user=await User.findOne({email});
         console.log(email)
         console.log(user)
-        const hashed=user.password;
-        bcrypt.compare(data.password, hashed, function(err, result){
+        const hashedpassword=user.password;
+        bcrypt.compare(data.password, hashedpassword, function(err, result){
             if(result===true){
                 const token=jwt.sign({userID:user._id}, "rohan");
                 console.log(token)

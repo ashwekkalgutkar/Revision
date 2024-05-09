@@ -23,6 +23,28 @@ const userSchema=mongoose.Schema({
 const User=mongoose.model("User",userSchema);
 
 
+const restaurantSchema=mongoose.Schema({
+    name:{type:String, required:true},
+    address:{
+        type:Object,
+        properties:{
+            street:{type:String, required:true},
+            city:{type:String, required:true},
+            state:{type:String, required:true},
+            country:{type:String, required:true},
+            zip:{type:String, required:true},
+        }
+    },
+    menu:{type:Array,
+        properties:{
+            name:{type:String, required:true},
+            description:{type:String, required:true},
+            price:{type:Number, required:true},
+            image:{type:String, required:true},
+        }
+    }
+})
+
 const Restaurant=mongoose.model("Restaurant",restaurantSchema);
 
 
@@ -48,28 +70,6 @@ const orderSchema=mongoose.Schema({
         }
     },
     status:{type:String, required:true}
-})
-
-const restaurantSchema=mongoose.Schema({
-    name:{type:String, required:true},
-    address:{
-        type:Object,
-        properties:{
-            street:{type:String, required:true},
-            city:{type:String, required:true},
-            state:{type:String, required:true},
-            country:{type:String, required:true},
-            zip:{type:String, required:true},
-        }
-    },
-    menu:{type:Array,
-        properties:{
-            name:{type:String, required:true},
-            description:{type:String, required:true},
-            price:{type:Number, required:true},
-            image:{type:String, required:true},
-        }
-    }
 })
 
 const Order=mongoose.model("Order",orderSchema);
